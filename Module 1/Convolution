@@ -1,0 +1,47 @@
+public class Convolution {
+
+    /**
+     * @param input is a n1 x m1 non-null rectangular matrix with at least 3 rows and 3 cols
+     * @param kernel is a 3 x 3 square matrix
+     * @return a matrix M with dimension (n1-2) x (m1-2) with
+     *         M[i][j] = sum_{k in 0..2, l in 0..2} input[i+k][j+l]*kernel[k][l]
+     */
+
+    public static int [][] convolution(int [][] input, int [][] kernel) {
+        int [][] M;
+        M = new int[input.length - 2][] ;
+        for (int m=0 ; m < input.length - 2 ; m++){
+            M[m] = new int[input[0].length - 2] ;
+        }
+        for (int i=0 ; i < M.length ; i++){
+            for (int j=0 ; j < M[i].length ; j++){
+                int element = 0 ;
+                for (int k=0 ; k <= 2 ; k++){
+                    for (int l=0 ; l <= 2 ; l++){
+                        element += (input[i+k][j+l]) * (kernel[k][l]) ;
+                    }
+                }
+                M[i][j] = element ;
+            }
+        }
+        for (int c=0 ; c < M.length ; c++){                     //il ne faut pas mettre la boucle for dans la soumission, cette commande sert juste a print des arrays
+            System.out.println(java.util.Arrays.toString(M[c]));
+        }
+        return M ;
+    }
+
+    public static void main(String[] args) {
+        int[][] a = {
+            {1,2,1,5,6},
+            {3,1,5,7,2},
+            {1,4,5,2,1},
+            {6,7,1,0,3} };
+
+        int[][] b = {
+                {0,0,0},                                              //encore des tests que j'ai effectué
+                {0,1,1},
+                {0,0,0} };
+
+        convolution(a, b);
+    }
+}
