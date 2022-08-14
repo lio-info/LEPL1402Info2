@@ -1,1 +1,18 @@
+//Write a piece of code that generates an ArrayIndexOutOfBoundsException without using the throw statement.
 
+int[] myArray = {1,2,3} ;
+System.out.println(myArray[3]) ;
+
+
+
+//Write a piece of code that generates an NullPointerException without using the throw statement.
+
+String[][] myArray ;
+myArray = new String[3][] ;
+System.out.println(myArray[0].length) ;
+
+
+
+//Write a piece of code that generates an ConcurrentModificationException without using the throw statement and with the usage of a list.
+
+jsp...
