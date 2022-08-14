@@ -1,0 +1,50 @@
+public class Exceptions {
+    //Exceptions
+
+    public static double divide(int i1, int i2) throws ArithmeticException{
+        if (i2 == 0) {
+            throw new ArithmeticException() ;
+        } else {
+            double x = i1;
+            double y = i2;
+            return x/y ;
+        }
+    }
+
+    public static boolean canDivide(int i1, int i2){
+        try{
+            divide(i1, i2) ;
+            return true ;
+        }
+        catch (Exception e){
+            return false ;
+        }
+    }
+
+    public static double betterDivide(int i1, int i2) throws ArithmeticException{
+        if (i2 == 0) {
+            throw new ArithmeticException("You tried to divide by zero") ;
+        } else {
+            double x = i1;
+            double y = i2;
+            return x/y ;
+        }
+    }
+
+    public static String betterCanDivide(int i1, int i2){
+        try{
+            double x = divide(i1, i2) ;
+            String message1 = x+"" ;
+            return message1 ;
+        }
+        catch (Exception e){
+            String message2 = "You tried to divide by zero" ;
+            return message2 ;
+        }
+    }
+
+
+    public static void main(String[] args) {
+
+    }
+}
