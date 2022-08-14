@@ -1,0 +1,112 @@
+public class ArraysAndMatrices {
+    /**
+     * Create a matrix from a String.
+     *
+     * The string is formatted as follow:
+     *  - Each row of the matrix is separated by a newline
+     *    character \n
+     *  - Each element of the rows are separated by a space
+     *  For example, the String "0 1\n2 3" represent the
+     *  matrix:
+     *      [0 1]
+     *      [2 3]
+     *
+     *  @param s The input String
+     *  @return The matrix represented by the String
+     */
+     
+    public static int[][] buildFrom(String s) {    //j'ai rien compris à cette methode. J'ai simplement retourné une matrice pour que le code compile...
+        int[][] x = {{1,2},{3,4}};
+        return x;
+    }
+
+    /**
+     * Compute the sum of the element in a matrix
+     *
+     * @param matrix The input matrix
+     * @return The sum of the element in matrix
+     */
+
+    public static int sum(int[][] matrix) {
+        int total = 0 ;
+        for (int i=0 ; i< matrix.length ; i++){
+            for (int j=0 ; j<matrix[i].length ; j++){
+                total+=matrix[i][j] ;
+            }
+        }
+        return total ;
+    }
+
+    /**
+     * Compute the transpose of a matrix
+     *
+     * @param matrix The input rectangular matrix
+     * @return A new matrix that is the transpose of matrix
+     */
+    public static int[][] transpose(int[][] matrix) {
+        for (int i=0 ; i < matrix.length ; i++){
+            if (matrix[i].length != matrix[0].length){
+                return null ;
+            }
+        }
+
+        int[][] trans = new int[matrix[0].length][] ;
+        for (int m=0 ; m < trans.length ; m++){
+            trans[m] = new int[matrix.length] ;
+        }
+
+        for (int j=0 ; j < matrix.length ; j++){
+            for (int k=0 ; k < matrix[j].length ; k++){
+                trans[k][j] = matrix[j][k];
+            }
+        }
+        for (int c=0 ; c < trans.length ; c++) {
+            System.out.println(java.util.Arrays.toString(trans[c]));
+        }
+        return trans ;
+    }
+
+    /**
+     * Compute the product of two matrix
+     *
+     * @param matrix1 A n x m matrix
+     * @param matrix2 A m x k matrix
+     * @return The n x k matrix product of matrix1 and matrix2
+     */
+    public static int[][] product(int[][] matrix1, int[][] matrix2) {
+        if (matrix1[0].length != matrix2.length){
+            return null ;
+        }
+
+        int[][] prod = new int[matrix1.length][matrix2[0].length] ;
+        for (int i=0 ; i < prod.length ; i++){
+            for (int j=0 ; j < prod[i].length ; j++){
+                prod[i][j] = 0 ;
+                for (int k=0 ; k < matrix2.length ; k++){
+                    prod[i][j] += (matrix1[i][k]) * (matrix2[k][j]) ;
+                }
+            }
+        }
+        for (int c=0 ; c < prod.length ; c++) {
+            System.out.println(java.util.Arrays.toString(prod[c]));
+        }
+        return prod ;
+    }
+
+    public static void main(String[] args) {
+        int[][] a = {
+                {1,2,1,5,6},
+                {3,1,5,7,2},
+                {1,4,5,2,1},
+                {6,7,1,0,3} };
+
+        int[][] b = {
+                {1,4,2},
+                {2,4,1},
+                {2,2,1},
+                {1,2,1},
+                {5,0,2} };
+        product(a,b);
+    }
+
+}
