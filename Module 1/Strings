@@ -1,0 +1,123 @@
+class Exercices {
+    /**
+     * Split a string according to a delimiter
+     *
+     * @param str The string to split
+     * @param delimiter The delimiter
+     * @return An array containing the substring which fall
+     *          between two consecutive occurence of the delimiter.
+     *          If there is no occurence of the delimiter, it should
+     *          return an array of size 1 with the string at element 0
+     */
+    public static String[] split(String str, char delimiter){
+
+        int counter = 0;
+        for (int i=0 ; i < str.length() ; i++){
+            if (str.charAt(i) == delimiter){
+                counter++ ;
+            }
+        }
+        System.out.println(counter);
+
+        String[] splitted = new String[counter+1];
+
+        if (counter == 0){
+            splitted[0] = str ;
+            System.out.println(java.util.Arrays.toString(splitted));
+            return splitted ;
+        }
+
+        int x = 0 ;
+        int y = 0 ;
+        for (int j=0 ; j < str.length() ; j++){
+            if (str.charAt(j) == delimiter){
+                splitted[x] = str.substring(y,j) ;
+                y += splitted[x].length() + 1 ;
+                x++ ;
+            }
+        }
+        splitted[x] = str.substring(y) ;
+
+        System.out.println(java.util.Arrays.toString(splitted));
+        return splitted ;
+    }
+
+    /**
+     * Find the first occurence of a substring in a string
+     *
+     * @param str The string to look in
+     * @param sub The string to look for
+     * @return The index of the start of the first appearance of
+     *          the substring in str or -1 if sub does not appear
+     *          in str
+     */
+    public static int indexOf(String str, String sub){
+        int index = -1 ;
+        for (int i=0 ; i < str.length() ; i++){
+            int j = 0 ;
+            int k = i ;
+            while (str.charAt(k) == sub.charAt(j)){
+                if (j == sub.length() - 1){
+                    index = k - (sub.length() - 1) ;
+                    break ;
+                }
+                j++ ;
+                k++ ;
+            }
+            if (index != -1){       //pour retourner la première apparence de sub dans str
+                break ;
+            }
+        }
+        return index ;
+    }
+
+    /**
+     * Convert a string to lowercase
+     *
+     * @param str The string to convert
+     * @return A new string, same as str but with every
+     *          character put to lower case.
+     */
+    public static String toLowerCase(String str){
+        char[] myString = str.toCharArray();
+        for (int i=0 ; i < str.length() ; i++){
+            if ((myString[i] >= 'A') && (myString[i] <= 'Z')){   //On test si il y a une majuscule
+                myString[i] += 'a' - 'A' ;
+            }
+        }
+        return String.valueOf(myString);
+    }
+
+    /**
+     * Check if a string is a palyndrome
+     *
+     * A palyndrome is a sequence of character that is the
+     * same when read from left to right and from right to
+     * left.
+     *
+     * @param str The string to check
+     * @return true if str is a palyndrome, false otherwise
+     */
+    public static boolean palindrome(String str){
+        int x = 0 ;
+        for (int i=0 ; i < str.length() ; i++){
+            if (str.charAt(i) == str.charAt(str.length() - (1+i))){
+                x++ ;
+            }
+        }
+        if (x == str.length()){
+            return true ;
+        }
+        else{
+            return false ;
+        }
+    }
+
+
+    public static void main(String[] args) {
+        split("Here.I.Go", '.');
+        System.out.println(indexOf("test-123-test" , "st"));
+        System.out.println(toLowerCase("HzKSJsJJnlJDfs?D"));
+        System.out.println(palindrome("meetsysteem"));  //le plus long palidrome nl dont je me souviens lol
+    }
+}
