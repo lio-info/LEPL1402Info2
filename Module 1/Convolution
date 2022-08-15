@@ -24,8 +24,8 @@ public class Convolution {
                 M[i][j] = element ;
             }
         }
-        for (int c=0 ; c < M.length ; c++){                     //il ne faut pas mettre la boucle for dans la soumission, cette commande sert juste a print des arrays
-            System.out.println(java.util.Arrays.toString(M[c]));
+        for (int c=0 ; c < M.length ; c++){                     //il ne faut pas mettre la boucle for dans la soumission, elle sert juste a print des arrays.
+            System.out.println(java.util.Arrays.toString(M[c]));                //C'est pratique pour voir ce que fait ton code.
         }
         return M ;
     }
