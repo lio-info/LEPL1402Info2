@@ -1,0 +1,82 @@
+class Anagram {
+    /**
+     * Count the number of occurrences of each letter of the alphabet
+     * (from 'A' to 'Z') in the given string. The function must return
+     * an array containing 26 elements: The item with index 0 contains
+     * the number of 'A' in the string, the item with index 1 contains
+     * the number of 'B', and so on.
+     *
+     * This function must be case-insensitive, i.e. the character 'f'
+     * must be considered as the same as character 'F'.
+     *
+     * Characters that are neither in the range 'a' to 'z', nor in the
+     * range 'A' to 'Z' must be ignored.
+     *
+     * @param s The string of interest.
+     * @return An array counting the number of occurrences of each
+     * letter.
+     **/
+    public static int[] countAlphabet(String s) {
+        char[] alphabetLow={'a','b','c','d','e','f','g','h','i','j','k','l',
+                'm','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+        char[] alphabetUp={'A','B','C','D','E','F','G','H','I','J','K','L',
+                'M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+        int[] occurences = new int[26] ;  //oui, je me suis fait chier à écrire l'alphabet... deux fois
+
+        for (int i=0 ; i < 26 ; i++){
+            int count = 0 ;
+            for (int j=0 ; j < s.length() ; j++){
+                if ((alphabetLow[i] == s.charAt(j)) || (alphabetUp[i] == s.charAt(j))){
+                    count++ ;
+                }
+            }
+            occurences[i] = count ;
+        }
+        return occurences;
+    }
+    
+
+    /**
+     * Check whether one string is an anagram of another string. It is
+     * strongly advised to use the function "countAlphabet()" as a
+     * building block for function "isAnagram()".
+     * @param s1 The first string.
+     * @param s2 The second string.
+     * @return <code>true</code> iff. the two strings are anagrams.
+     **/
+    public static boolean isAnagram(String s1, String s2) {
+        if (s1.length() != s2.length()){
+            return false ;
+        }
+
+        int[] lettersS1 = countAlphabet(s1) ;
+        int[] lettersS2 = countAlphabet(s2) ;
+        int check = 0 ;
+        for (int i=0 ; i < 26 ; i++){
+            if (lettersS1[i] == lettersS2[i]){
+                check += lettersS1[i] ;
+            }
+        }
+
+        int amountOfSpaces = 0 ;
+        for (int j=0 ; j < s1.length() ; j++){
+            if (s1.charAt(j) == ' '){
+                amountOfSpaces ++ ;
+            }
+        }     //J'ai du rajouter ce block prcq certains anagrammes peuvent être des phrases et contenir des ' '
+        check += amountOfSpaces ;
+
+        if (check == s1.length()){
+            return true ;
+        }
+        else{
+            return false;
+        }
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println(java.util.Arrays.toString(countAlphabet("My man, I like boobieszZzZz!")));
+        System.out.println(isAnagram("Madam Curie", "Radium came"));
+    }
+}
