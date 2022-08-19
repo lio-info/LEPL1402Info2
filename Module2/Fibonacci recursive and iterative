@@ -1,0 +1,33 @@
+class Fibonacci {
+    /*
+     * Returns the index-th element of the fibonnaci sequence, computed recursively
+     */
+    public static int fiboRecursive(int index){
+        if (index < 2) {
+            return index;
+        }
+        return fiboRecursive(index - 1) + fiboRecursive(index - 2);
+    }
+
+    /*
+     * Returns the index-th element of the fibonnaci sequence, computed iteratively
+     */
+    public static int fiboIterative(int index){
+        if (index < 2){
+            return index;
+        }
+        int first = 0;
+        int second = 1;
+        for (int i=0 ; i < index - 2 ; i++){
+            int temp = second;
+            second += first;
+            first = temp;
+        }
+        return first + second;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(fiboRecursive(14));
+        System.out.println(fiboIterative(14));
+    }
+}
