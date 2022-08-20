@@ -9,7 +9,7 @@ class ContiguouSubarray {
      * For example for the array [-2,1,-3,4,-1,2,1,-5,4] your method should return [6, 3, 6]
      */
     public static int[] maxSubArray(int[] a){                //Mon très beau code fonctionne parfaitement mais apparemment mon "time complexity" est en O(n^3)
-        int maxSum = impossibleMaxSum(a);                    //et ils veulent du O(n^2) ou jsp quoi de mes couilles là ==> pas la totalité des points sur ingenious :(
+        int maxSum = impossibleMaxSum(a);                    //et ils veulent du O(n^2) ou jsp quoi de mes couilles là ==> pas la totalité des points sur inginious :(
         int startSubArray = 0;
         int endSubArray = 0;
         int[] result = new int[3];
