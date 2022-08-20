@@ -1,0 +1,81 @@
+int highestMountain = 0;
+        int deepestValley = 0;
+        int currentMountain = 0;
+        int currentValley = 0;
+        int index = 0;
+        int firstSlope = 0;
+        int slopesUp = 0;
+        int slopesDown = 0;
+        for (int i=0 ; i < slopeChanges(slopes) ; i++){
+            if (i > 0){
+                if (slopes[index - 1] == 1){         //Mon magnifique code (ok j'avoue, celui-là ressemble à rien) fonctionne très bien mais est à nouveau trop lent
+                    slopesDown = 0;                  //pour avoir la totalité des points sur inginious... Il n'est pas THETA(m)
+                }
+                else {
+                    slopesUp = 0;
+                }
+            }
+            if (slopes[index] == 1){
+                if (i==0){
+                    while (slopes[index] == 1){
+                        firstSlope ++;
+                        index++;
+                    }
+                }
+                else {
+                    while (slopes[index] == 1){
+                        slopesUp ++;
+                        index++;
+                        if (index == slopes.length){
+                            break;
+                        }
+                    }
+                }
+            }
+            else {
+                if (i==0){
+                    while (slopes[index] == -1){
+                        firstSlope ++;
+                        index++;
+                    }
+                }
+                else {
+                    while (slopes[index] == -1){
+                        slopesDown ++;
+                        index ++;
+                        if (index == slopes.length){
+                            break;
+                        }
+                    }
+                }
+            }
+
+
+            if (i < 2 && i !=0){
+                if (slopes[index - 1] == -1){
+                    currentMountain = Math.min(firstSlope,slopesDown);
+                }
+                else {
+                    currentValley = Math.min(firstSlope,slopesUp);
+                }
+            }
+            if (i > 1) {
+                if (slopes[index - 1] == -1){
+                    currentMountain = Math.min(slopesDown,slopesUp);
+                }
+                else currentValley = Math.min(slopesDown,slopesUp);
+            }
+
+
+            if (currentMountain > highestMountain){
+                highestMountain = currentMountain;
+            }
+            if (currentValley > deepestValley){
+                deepestValley = currentValley;
+            }
+        }
+
+
+        int[] elevations = new int[]{deepestValley,highestMountain};
+        System.out.println(java.util.Arrays.toString(elevations));
+        return elevations;
