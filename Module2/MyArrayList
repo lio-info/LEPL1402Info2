@@ -112,7 +112,7 @@ public class MyArrayList<Item> implements Iterable<Item> {
 
         @Override
         public void remove() {
-            Iterator.super.remove();
+            throw new UnsupportedOperationException();
         }
 
         @Override
