@@ -1,0 +1,128 @@
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.function.Consumer;
+
+public class MyArrayList<Item> implements Iterable<Item> {
+
+    private Object[] list;
+    private int size;
+
+    //constructor
+    public MyArrayList(int initSize) throws IndexOutOfBoundsException{
+        if (initSize < 0){
+            throw new IndexOutOfBoundsException();
+        }
+        list = new Object[initSize];
+        size = 0;
+    }
+
+
+    /*
+     * Checks if 'list' needs to be resized then add the element at the end
+     * of the list.
+     */
+    public void enqueue(Item item){
+        if (size >= list.length){
+            Object[] copy = new Object[size+2];
+            for (int i=0 ; i < list.length ; i++){
+                copy[i] = list[i];
+            }
+            list = copy;
+        }
+        list[size] = item;
+        size ++;
+    }
+
+    /*
+     * Removes the element at the specified position in this list.
+     * Returns the element that was removed from the list. You don't need to
+     * resize when removing an element.
+     */
+    public Item remove(int index) throws IndexOutOfBoundsException{
+        if (index < 0 || index > size){
+            throw new IndexOutOfBoundsException();
+        }
+        else {
+            Item value = (Item) list[index];
+            list[index] = null;
+            shift(list , index);
+            size --;
+            return value;
+        }
+    }
+
+    public static void shift(Object[] list , int index){
+        for (int i = index ; i < list.length ; i++){
+            try{
+                list[i] = list[i+1];
+            }
+            catch (Exception e){
+                list[i] = null;
+            }
+        }
+    }
+
+    public int size(){
+        return this.size;
+    }
+
+    public Object [] getList(){
+        return this.list;
+    }
+
+
+    @Override
+    public Iterator<Item> iterator() {
+        return new MyArrayListIterator();
+    }
+
+
+    private class MyArrayListIterator implements Iterator<Item> {
+        private int sizeInit = size;
+        private int index = 0;
+
+        private boolean failFastCheck() throws ConcurrentModificationException {               //J'ai trouvé cette méthode sur le github EPL
+            if (size != sizeInit)
+                throw new ConcurrentModificationException("ArrayList modified while iterating on it");
+            return true;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return (index < size) && failFastCheck();
+        }
+
+        @Override
+        public Item next() throws NoSuchElementException {
+            if (!hasNext()){
+                throw new NoSuchElementException();
+            }
+            return (Item)  list[index++];
+        }
+
+        private boolean exception(){
+            if (size != sizeInit){
+                throw new ConcurrentModificationException();
+            }
+            else{
+                return true;
+            }
+        }
+
+        @Override
+        public void remove() {
+            Iterator.super.remove();
+        }
+
+        @Override
+        public void forEachRemaining(Consumer<? super Item> action) {
+            Iterator.super.forEachRemaining(action);
+        }
+    }
+
+    public static void main(String[] args) {
+
+    }
+
+}
