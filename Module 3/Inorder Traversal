@@ -1,0 +1,35 @@
+import java.util.List;
+import java.util.Stack;
+
+public class Traversal {
+
+    public static void recursiveInorder(Node root, List<Integer> res) {     //Trouvé sur le github epl
+        if (root.left != null){
+            recursiveInorder(root.left , res);
+        }
+        res.add(root.val);
+        if (root.right != null){
+            recursiveInorder(root.right , res);
+        }
+    }
+
+
+    public static void iterativeInorder(Node root, List<Integer> res){       //Aidé du github epl
+        Stack<Node> s = new Stack<>();
+        Node currentNode = root;
+
+        while (! s.isEmpty() || currentNode != null){
+            while(currentNode.left != null){
+                s.push(currentNode);
+                currentNode = currentNode.left;
+            }
+            res.add(currentNode.val);
+            if (! s.isEmpty()){
+                currentNode = s.pop();
+                res.add(currentNode.val);
+            }
+            currentNode = currentNode.right;
+        }
+    }
+
+}
