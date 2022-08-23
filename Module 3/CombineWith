@@ -1,0 +1,68 @@
+public class Tree {                                                     //Trouvé sur github epl
+
+    public Node root;
+
+    public Tree(Node root){
+        this.root = root;
+    }
+
+    public Tree combineWith(Tree o){
+        if (o == null || o.root == null) {
+            return this;
+        }
+        if (this.root == null) {
+            return o;
+        }
+        Tree combinedTree = new Tree(new Node(0));
+        createTree(combinedTree.root, this.root, o.root);
+        return combinedTree;
+    }
+
+    public static void createTree(Node combinedNode , Node node1 , Node node2){
+        if (node1.left != null || node2.left != null){
+            combinedNode.left = new Node(0);
+            if (node1.left != null && node2.left != null){
+                createTree(combinedNode.left , node1.left , node2.left);
+            }
+            else if (node1.left == null){
+                continueTreeSolo(combinedNode.left , node2.left);
+            }
+            else{
+                continueTreeSolo(combinedNode.left , node1.left);
+            }
+        }
+
+        combinedNode.val = node1.val + node2.val;
+
+        if (node1.right != null || node2.right != null){
+            combinedNode.right = new Node(0);
+            if (node1.right != null && node2.right != null){
+                createTree(combinedNode.right , node1.right , node2.right);
+            }
+            else if (node1.right == null){
+                continueTreeSolo(combinedNode.right , node2.right);
+            }
+            else{
+                continueTreeSolo(combinedNode.right , node1.right);
+            }
+        }
+    }
+
+    public static void continueTreeSolo(Node combinedNode , Node soloNode){
+        if (!soloNode.isLeaf()){
+            if (soloNode.left != null){
+                combinedNode.left = new Node(0);
+                continueTreeSolo(combinedNode.left , soloNode.left);
+            }
+            combinedNode.val = soloNode.val;
+
+            if (soloNode.right != null){
+                combinedNode.right = new Node(0);
+                continueTreeSolo(combinedNode.right , soloNode.right);
+            }
+        }
+        else {
+            combinedNode.val = soloNode.val;
+        }
+    }
+}
