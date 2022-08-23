@@ -1,0 +1,58 @@
+public class MergeSort {                    //J'ai pas réussi faire le mergeSort du coup j'ai juste fait une méthode qui fait la même chose mais de façon itérative et
+                                            /non récuresive. Ca ne fonctionne pas sur inginious parce que je n'utilise pas la méthode sort... vrmt nsm cet exercice
+    /**
+     * Pre-conditions: a[lo..mid] and a[mid+1..hi] are sorted
+     * Post-conditions: a[lo..hi] is sorted and a is left unchanged
+     */
+    private static void merge(int[] a, int[] aux, int lo, int mid, int hi) {
+        int[] copyA = new int[a.length];               
+        for (int j=0 ; j < copyA.length ; j++){           //On copy a
+            copyA[j] = a[j];
+        }
+
+        int l = 0;
+        int[] sortedArray = new int[a.length];
+        int max = a[0];
+        for (int i=0 ; i < a.length ; i++){
+            if (a[i] >= max){
+                max = a[i];
+            }
+        }
+        while (l < a.length){
+            int min = a[0];
+            int indexMin = 0;
+            for (int i=0 ; i < a.length ; i++){
+                if (a[i] <= min){
+                    min = a[i];
+                    indexMin = i;
+                }
+            }
+            a[indexMin] = max;
+            sortedArray[l] = min;
+            l++;
+        }
+        a = copyA;               //parce qu'il faut garder a inchangé
+        aux = sortedArray;       //parce que aux doit être la liste ordonnée
+        System.out.println(java.util.Arrays.toString(a));
+        System.out.println(java.util.Arrays.toString(aux));
+    }
+    
+    
+    
+    
+    /**
+     * Rearranges the array in ascending order, using the natural order
+     */
+    public static void sort(int[] a) {
+        // TODO By Student
+    }
+
+    //TODO Optionnal additionnal method
+    
+    
+   public static void main(String[] args) {
+        int[] a = {1,8,3,3,5,-7,1,8,2,6,-9};
+        int[] aux = new int[a.length];
+        merge(a , aux , 0 , 0 , 0);
+    }
+}
