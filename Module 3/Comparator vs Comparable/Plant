@@ -1,0 +1,55 @@
+public class Plant implements Comparable<Plant>{
+
+    private String name;
+    private int age;
+
+    public Plant(String name, int age){
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    /*
+     * Should compare Plant by using name and age in that specific order
+     * returns:
+     *      > 0 if this is greater than o
+     *      0 if they are equal
+     *      < 0 if this is less than o
+     */
+    @Override
+    public int compareTo(Plant o) {
+        if (o == null || this == null){
+            throw new NullPointerException();
+        }
+        String nameThis = this.getName();
+        String nameO = o.getName();
+        int j = 0;
+        for (int i=0 ; i < Math.min(nameThis.length() , nameO.length()) ; i++){
+            if (nameThis.charAt(i) == nameO.charAt(i)){
+                j++;
+            }
+            if (nameThis.charAt(i) > nameO.charAt(i)){
+                return 1;
+            }
+            else if (nameThis.charAt(i) < nameO.charAt(i)){
+                return -1;
+            }
+        }
+        if (j == Math.min(nameThis.length() , nameO.length())){
+            if (nameThis.length() > nameO.length()){
+                return 1;
+            }
+            else {
+                return -1;
+            }
+        }
+        return this.getAge() - o.getAge();
+    }
+}
