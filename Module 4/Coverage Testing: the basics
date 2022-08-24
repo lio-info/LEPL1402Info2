@@ -1,0 +1,21 @@
+import org.junit.Test;
+import static junit.framework.TestCase.assertEquals;       //@param array A non-null and non empty array of integers ---> il faut pas vérifier ce qu'il se passe dans le
+                                                           //cas où l'array est vide ou s'il contient autre chose que des int.
+public class MaximumTest {                                 //Les seuls 2 cas à checker pour "provide a test suite for coverage check", c'est si array.length() > 1
+                                                           //et array.lenght == 1. C-à-d si on exécute la boucle for ou pas.
+    @Test
+    public void test1() {
+        int[] a = new int[]{2,3,8,-9,0,8,4}; // your test array
+        int max = Maximum.maximum(a); // find the maximum
+        assertEquals(8 , max);
+    }
+
+    // some other tests in order to have edge and node coverage
+
+    @Test
+    public void test2() {
+        int [] a = {4};
+        int max = Maximum.maximum(a);
+        assertEquals(4 , max);
+    }
+}
