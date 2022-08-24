@@ -1,0 +1,47 @@
+import org.junit.Test;
+import static junit.framework.TestCase.assertEquals;
+
+public class Tests {
+
+    @Test
+    public void test1() {
+        int [] a = {1,2,3};
+        int index = BinarySearch.binarySearch(a , 5);
+        assertEquals(-1 , index);
+    }
+
+    @Test
+    public void test2() {
+        int [] a = {2,4,5,7};
+        int index = BinarySearch.binarySearch(a , 2);
+        assertEquals(0 , index);
+    }
+                              //il faut simplement tester toutes les branches/tous les parcours possibles du code (tous les if/else, démarrer une boucle ou non, etc)
+    @Test
+    public void test3() {
+        int [] a = {2,4,5,6,7};
+        int index = BinarySearch.binarySearch(a , 7);
+        assertEquals(4 , index);
+    }
+
+    @Test
+    public void test4() {
+        int [] a = {2,4,5,7,8,10,18};
+        int index = BinarySearch.binarySearch(a , 7);
+        assertEquals(3 , index);
+    }
+
+    @Test
+    public void test5() {
+        int [] a = {2,4,5,7,8,10,18};
+        int index = BinarySearch.binarySearch(a , 10);
+        assertEquals(5 , index);
+    }
+
+    @Test
+    public void test6() {
+        int [] a = {2,4,5,7,8,10,18};
+        int index = BinarySearch.binarySearch(a , 4);
+        assertEquals(1 , index);
+    }
+}
