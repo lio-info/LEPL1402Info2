@@ -1,6 +1,6 @@
 public abstract class Shape {
 
-    public abstract double getArea(double d);           //C'est ça la seule difficulté, savoir qu'il ne faut pas mettre de body aux méthodes
+    public abstract double getArea(double d);           //C'est ça la seule difficulté; savoir qu'il ne faut pas mettre de body aux méthodes
                                                         //et savoir quels modifiers ils faut utiliser
     public abstract double getPerimeter(double d);
 }
