@@ -15,8 +15,8 @@ public class Cons<E> {
         this.next = next;
     }
 
-    // Returns a new Cons by applying Function function on all elements
-    public <R> Cons <R> map(Function <E,R> function) {
+    // Returns a new Cons by applying Function function on all elements         //Ne me demandez pas ce que j'ai foutu, j'en ai aucune idée. J'ai un peu chipoté et ça 
+    public <R> Cons <R> map(Function <E,R> function) {                          //a fonctionné.
         Cons<E> mappedCons = new Cons<E>((E) function.apply(this.v) , null);
         if (this.next != null){
             mappedCons.next =  (Cons<E>) this.next.map(function);
