@@ -1,0 +1,48 @@
+import java.util.function.Predicate;
+import java.util.function.Function;
+
+public class Cons<E> {
+
+    // The item inside this list node
+    public E v;
+
+    // The next element, null if there is none
+    public Cons<E> next;
+
+    // Constructor
+    public Cons(E v, Cons<E> next) {
+        this.v = v;
+        this.next = next;
+    }
+
+    // Returns a new Cons by applying Function function on all elements
+    public <R> Cons <R> map(Function <E,R> function) {
+        Cons<E> mappedCons = new Cons<E>((E) function.apply(this.v) , null);
+        if (this.next != null){
+            mappedCons.next =  (Cons<E>) this.next.map(function);
+        }
+        return (Cons<R>) mappedCons;
+
+    }
+    // Returns a new Cons containing all elements that match Predicate predicate
+    public Cons <E> filter(Predicate <E> predicate) {
+        if (this.next != null){
+            if (predicate.test(this.v)){
+                return new Cons<>(this.v , this.next.filter(predicate));
+            }
+            else {
+                return this.next.filter(predicate);
+            }
+        }
+        else {
+            if (predicate.test(this.v)){
+                return new Cons<>(this.v , null);
+            }
+            else {
+                return null;
+            }
+        }
+    }
+
+
+}
