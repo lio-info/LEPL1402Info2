@@ -1,6 +1,6 @@
 public class CommonElements {
 
-    public static int countArr(int [] tab1, int [] tab2) {
+    public static int count(int [] tab1, int [] tab2) {
         int counter = 0 ;
         if (tab1.length >= tab2.length){
             for (int i=0 ; i < tab2.length ; i++){
@@ -65,8 +65,8 @@ public class CommonElements {
         int[][] a = {
                 {1,2,1,5,6},
                 {3,1,5,7,2},
-                {1,4,5,2,1},                    //c'est juste moi qui ai fait des tests, vous en verrez souvent dans la methode main()
-                {6,7,1,0,3} };
+                {1,4,5,2,1},                    //C'est juste moi qui ai fait des tests, vous en verrez souvent dans la methode main()
+                {6,7,1,0,3} };                  //Il ne faut bien sur pas inclure le psvm dans la soumission sur Inginious.
         int[][] b = {
                 {1,2,1,5,6},
                 {3,3,5,3,2},
