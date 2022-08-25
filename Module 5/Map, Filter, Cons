@@ -1,0 +1,44 @@
+public class Cons {
+    // The item inside this list node
+    public int v;
+    // The next element, null if there is none                      //github epl
+    public Cons next;
+
+    // Constructor
+    public Cons(int v, Cons next) {
+        this.v = v;
+        this.next = next;
+    }
+
+
+    // Returns a new Cons by applying function f on all elements
+    public Cons map(F f) {
+        Cons idfkWhatMapStandsForInThisContext = new Cons(f.apply(this.v) , null);
+        if (this.next != null){
+            idfkWhatMapStandsForInThisContext.next = this.next.map(f);
+        }
+        return idfkWhatMapStandsForInThisContext;
+    }
+
+    // Returns a new Cons containing all elements that match predicate p
+    public Cons filter(P p) {
+
+        if (this.next != null) {
+            if (p.filter(this.v)) {
+                return new Cons(this.v , this.next.filter(p));
+            }
+            else return this.next.filter(p);
+        }
+        else {
+            if (p.filter(this.v)){
+                return new Cons(this.v , null);
+            }
+            else {
+                return null;
+            }
+        }
+
+    }
+
+
+}
