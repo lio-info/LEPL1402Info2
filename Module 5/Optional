@@ -1,0 +1,40 @@
+import java.util.Optional;
+import java.util.function.Function;                     //github epl
+
+public class OptionalTest {
+
+    /**
+     * Returns an Optional<TeamLeader> object from teamLeader
+     */
+    public Optional<TeamLeader> createOptionalTeamLeader(TeamLeader teamLeader) {
+        return Optional.ofNullable(teamLeader);
+    }
+
+    /**
+     * Increments the age of teamLeader by one
+     */
+    public void incAge(Optional<TeamLeader> optionalTeamLeader) {
+        optionalTeamLeader.ifPresent(n -> n.setAge(n.getAge() + 1));
+    }
+
+    /**
+     * Increments the age of teamLeader by one only if its age is > 15
+     */
+    public void incAgeIfMoreThanFifteen(Optional<TeamLeader> optionalTeamLeader) {
+        optionalTeamLeader.filter(n -> n.getAge() > 15).ifPresent(n -> n.setAge(n.getAge() + 1));
+    }
+
+    /**
+     * Returns the name of the teamLeader or "No team leader"
+     */
+    public String getName(Optional<TeamLeader> optionalTeamLeader) {
+        return optionalTeamLeader.map(n -> n.getName()).orElse("No team leader");
+    }
+
+    /**
+     * Returns the name of the teamLeader of the team of the person or "No team leader"
+     */
+    public String getNameOfTeamLeader(Optional<Person> optionalPerson) {
+        return optionalPerson.flatMap(n -> n.getTeam()).flatMap(n -> n.getTeamLeader()).map(n -> n.getName()).orElse("No team leader");
+    }
+}
