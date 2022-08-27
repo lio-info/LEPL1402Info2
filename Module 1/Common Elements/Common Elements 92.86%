@@ -1,0 +1,76 @@
+public class CommonElements {
+
+    public static int count(int [] tab1, int [] tab2) {                 //Je me suis vrmt cassé la tête pour rien
+        int counter = 0 ;
+        if (tab1.length >= tab2.length){
+            for (int i=0 ; i < tab2.length ; i++){
+                if (tab1[i] == tab2[i]){
+                    counter++ ;
+                }
+            }
+        }
+        else{
+            for (int j=0 ; j < tab1.length ; j++){
+                if (tab1[j] == tab2[j]) {
+                    counter++;
+                }
+            }
+        }
+        return counter ;
+    }
+
+
+    public static int count(int [][] tab1, int [][] tab2) {
+        int counter = 0 ;
+        if (tab1.length <= tab2.length){
+            for (int i=0 ; i < tab1.length ; i++){
+                if (tab1[i].length <= tab2[i].length){
+                    for (int j=0 ; j < tab1[i].length ; j++){
+                        if (tab1[i][j] == tab2[i][j]){
+                            counter++ ;
+                        }
+                    }
+                }
+                else{
+                    for (int k=0 ; k < tab2.length ; k++){
+                        if (tab1[i][k] == tab2[i][k]) {
+                            counter++;
+                        }
+                    }
+                }
+            }
+        }
+        else{
+            for (int l=0 ; l < tab2.length ; l++){
+                if (tab1[l].length <= tab2[l].length){
+                    for (int m=0 ; m < tab1[l].length ; m++){
+                        if (tab1[l][m] == tab2[l][m]){
+                            counter++ ;
+                        }
+                    }
+                }
+                else{
+                    for (int n=0 ; n < tab2[l].length ; n++){
+                        if (tab1[l][n] == tab2[l][n]) {
+                            counter++;
+                        }
+                    }
+                }
+            }
+        }
+        return counter ;
+    }
+
+    public static void main(String[] args) {
+        int[][] a = {
+                {1,2,1,5,6},
+                {3,1,5,7,2},
+                {1,4,5,2,1},                    //C'est juste moi qui ai fait des tests, vous en verrez souvent dans la methode main()
+                {6,7,1,0,3} };                  //Il ne faut bien sur pas inclure le psvm dans la soumission sur Inginious.
+        int[][] b = {
+                {1,2,1,5,6},
+                {3,3,5,3,2},
+                {1,4,6,2,1}};
+        System.out.println(count(a,b));
+    }
+}
