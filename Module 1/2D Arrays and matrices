@@ -12,13 +12,23 @@ public class ArraysAndMatrices {
      *      [2 3]
      *
      *  @param s The input String
-     *  @return The matrix represented by the String
+     *  @return The matrix represented by the String                   il m'a bien cassé les couilles celui-là
      */
      
-    public static int[][] buildFrom(String s) {    //j'ai rien compris à cette methode. J'ai simplement retourné une matrice pour que le code compile...
-        int[][] x = {{1,2},{3,4}};
-        return x;
+    public static int[][] buildFrom(String s) {
+        String[] separatedString = s.split("\n");
+        System.out.println(java.util.Arrays.toString(separatedString));
+        int[][] result = new int[separatedString.length][];
+        for (int i=0 ; i < separatedString.length ; i++){
+            String[] temp = separatedString[i].split(" ");
+            result[i] = new int[temp.length];
+            for (int j=0 ; j < result[i].length ; j++){
+                result[i][j] = Integer.parseInt(temp[j]);
+            }
+        }
+        return result;
     }
+    
 
     /**
      * Compute the sum of the element in a matrix
