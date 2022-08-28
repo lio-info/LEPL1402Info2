@@ -1,0 +1,47 @@
+public class Exercices {
+
+    /**
+     * Find the contiguous subarray with the maximal sum
+     *
+     * @param a a non-empty array
+     * @return A triplet (sum, start, end) with sum the sum of the subarray and `start` and `end` the
+     *         start and end of the subarray
+     *
+     * For example for the array [-2,1,-3,4,-1,2,1,-5,4] your method should return [6, 3, 6]
+     */
+    public static int[] maxSubArray(int[] a){
+        int max = a[0];
+        int indexLow = 0;
+        int indexHigh = 0;
+        for (int k=0 ; k < a.length ; k++){
+            if (a[k] > max){
+                max = a[k];
+                indexLow = k;
+                indexHigh = k;
+            }
+        }
+        int[] result = {max , indexLow , indexHigh};
+        for (int i=0 ; i < a.length ; i++){
+            int sum = 0;
+            if (a[i] < 0){
+                continue;
+            }
+            for (int j=0 ; j < a.length - i ; j++){
+                sum += a[i+j];
+                if (sum > max){
+                    max = sum;
+                    result[0] = max;
+                    result[1] = i;
+                    result[2] = j+i;
+                }
+            }
+        }
+        System.out.println(java.util.Arrays.toString(result));
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] a = {-2,1,-3,4,-1,2,1,-5,4};
+        maxSubArray(a);
+    }
+}
