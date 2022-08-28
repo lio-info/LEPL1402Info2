@@ -1,0 +1,52 @@
+public interface RecursiveStack {
+
+    /**
+     * Factory method
+     * @return a new instance of your implementation of RecursiveStack
+     */
+    public static RecursiveStack makeRecursiveStack() {
+        return new RecS();
+    }
+
+    int size();
+    int top();
+    RecursiveStack removeTop();
+    RecursiveStack addTop(int v);
+
+    // TODO implement an (inner) class that implements the interface
+    class RecS implements RecursiveStack {
+        
+        RecS next = null;
+        Integer val = null;
+        
+        RecS() {}
+        
+        private RecS(int v, RecS next) {
+            this.val = Integer.valueOf(v);
+            this.next = next;
+        }
+        
+        @Override
+        public int size() {
+            if (this.val == null) return 0;
+            if (this.next == null) return 1;
+            return this.next.size()+1;
+        }
+            
+        @Override
+        public int top() {
+            if (this.val == null) throw new java.util.NoSuchElementException();
+            return this.val.intValue();
+        }
+        
+        @Override
+        public RecursiveStack removeTop() {
+            return this.next;
+        }
+        
+        @Override
+        public RecursiveStack addTop(int v) {
+            return new RecS(v, this);
+        }  
+    }
+}
