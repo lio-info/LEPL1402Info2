@@ -1,0 +1,116 @@
+import java.util.*;                                   //pfff c'était long mais c'est bon. Il y a surement moyen de faire un code plus court et plus efficace.
+
+
+/**
+ * Question:
+ *
+ * You are asked to compute the median of a list of pair (see the TODO below)
+ *
+ * Once it is done, copy-paste the complete class in Inginious also with the imports
+ *
+ *
+ * Feel free to add methods or fields in the class but do not modify
+ * the signature and behavior of existing code
+ *
+ */
+public class MedianOfPairs {
+
+    /**
+     * Return the median (=middle) element
+     * @param list, a list containing an odd number of distinct pairs
+     * @return the pair of the list such that
+     *      list.size/2 elements smaller, and list.size/2 element are greater
+     *      than the returned element using the increasing lexicographic ordering
+     * Example: for List((4,1),(3,8),(4,3),(9,1),(3,6)), the median is (4,1)
+     *
+     * Warning: your algorithm should execute in a time complexity strictly better than O(n^2)
+     * where n is the size of the list
+     *
+     */
+    public static Pair median(List<Pair> list) {
+        int[][] copy =  new int[list.size()][2];
+        for (int c=0 ; c < list.size() ; c++){
+            copy[c][0] = list.get(c).first;
+            copy[c][1] = list.get(c).second;
+        }
+        int[][] sortedPairs = new int[copy.length][2];
+        int max = list.get(0).first;
+        for (int i=0 ; i < copy.length ; i++){
+            if (copy[i][0] >= max){
+                max = copy[i][0];
+            }
+        }
+        int l = 0;
+        while (l < sortedPairs.length){
+            int min = copy[0][0];
+            int indexMin = 0;
+            for (int n=0 ; n < copy.length ; n++){
+                if (copy[n][0] <= min){
+                    min = copy[n][0];
+                    indexMin = n;
+                }
+            }
+            sortedPairs[l][0] = min;
+            sortedPairs[l][1] = copy[indexMin][1];
+            copy[indexMin][0] = max + 1;
+            l++ ;
+        }
+
+        for (int j=0 ; j < sortedPairs.length - 1 ; j++){
+            if (sortedPairs[j][0] == sortedPairs[j+1][0]){
+                int index = j;
+                int ctr = 0;
+                while (sortedPairs[index][0] == sortedPairs[j][0]){
+                    if(index == sortedPairs.length - 1){
+                        break;
+                    }
+                    ctr ++;
+                    index ++;
+                }
+                for (int k=0 ; k < ctr ; k++){
+                    if (sortedPairs[j][1] > sortedPairs[j+k][1]){
+                        int[] temp = {sortedPairs[j][0] , sortedPairs[j][1]};
+                        sortedPairs[j] = sortedPairs[j+k];
+                        sortedPairs[j+k] = temp;
+                    }
+                }
+            }
+        }
+        for (int p=0 ; p < sortedPairs.length ; p++){
+            System.out.println(java.util.Arrays.toString(sortedPairs[p]));
+        }
+
+        Pair median = new Pair(sortedPairs[sortedPairs.length/2][0],sortedPairs[sortedPairs.length/2][1]);
+        System.out.println(median.first);
+        System.out.println(median.second);
+
+        return median;
+    }
+
+
+    public static class Pair {
+        int first;
+        int second;
+        public Pair(int first, int second) {
+            this.first = first;
+            this.second = second;
+        }
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Pair> persons = new ArrayList<>();
+        persons.add(new Pair(4,1));
+        persons.add(new Pair(4,8));
+        persons.add(new Pair(4,3));
+        persons.add(new Pair(4,1));
+        persons.add(new Pair(4,6));
+        persons.add(new Pair(4,1));
+        persons.add(new Pair(4,3));
+        persons.add(new Pair(4,2));
+        persons.add(new Pair(4,1));
+        persons.add(new Pair(4,4));
+        persons.add(new Pair(4,3));
+
+        median(persons);
+    }
+}
