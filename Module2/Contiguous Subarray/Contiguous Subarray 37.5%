@@ -1,0 +1,61 @@
+class ContiguouSubarray {
+    /**
+     * Find the contiguous subarray with the maximal sum
+     *
+     * @param a a non-empty array
+     * @return A triplet (sum, start, end) with sum the sum of the subarray and `start` and `end` the
+     *         start and end of the subarray
+     *
+     * For example for the array [-2,1,-3,4,-1,2,1,-5,4] your method should return [6, 3, 6]
+     */
+    public static int[] maxSubArray(int[] a){                //Mon très beau code fonctionne parfaitement mais apparemment mon "time complexity" est en O(n^3)
+        int maxSum = impossibleMaxSum(a);                    //et ils veulent du O(n^2) ou jsp quoi de mes couilles là ==> pas la totalité des points sur inginious :(
+        int startSubArray = 0;
+        int endSubArray = 0;
+        int[] result = new int[3];
+        for (int i=0 ; i < a.length ; i++){
+            for (int j=0 ; j <= i ; j++ ){
+                int[] subArray = new int[i-j+1];
+                for (int k=0 ; k < subArray.length ; k++){
+                    subArray[k] = a[j+k];
+                }
+                int sum = sumSubArray(subArray);
+                if (sum > maxSum){
+                    maxSum = sum;
+                    startSubArray = j;
+                    endSubArray = i;
+                }
+            }
+        }
+        result[0] = maxSum;
+        result[1] = startSubArray;
+        result[2] = endSubArray;
+        System.out.println(java.util.Arrays.toString(result));
+        return result;
+    }
+
+    public static int sumSubArray(int[] subArray){
+        int sum = 0;
+        for (int i=0 ; i < subArray.length ; i++){
+            sum += subArray[i];
+        }
+        return sum;
+    }
+
+    public static int impossibleMaxSum(int[] a){
+        int notMax = a[0];
+        for (int i=1 ; i < a.length ; i++){
+            if (a[i] < notMax){
+                notMax = a[i];
+                return notMax;
+            }
+        }
+        return notMax;
+    }
+
+
+    public static void main(String[] args) {
+        int[] a = {-2,1,-3,4,-1,2,1,-5,4};
+        maxSubArray(a);
+    }
+}
