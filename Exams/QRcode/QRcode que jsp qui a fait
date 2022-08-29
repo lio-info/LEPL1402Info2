@@ -1,0 +1,79 @@
+import java.util.Arrays;      //J'ai trouvé ce code qui diffère bcp du mien mais jsp à qui il appartient. Je ne l'ai pas testé sur inginious mais il devrait être bon.
+
+/**
+ * Make sure that the equal method consider
+ * two QR codes as identical if they have been flipped
+ * by 0,1,2 or 3 quarter rotations
+ *
+ * For instance the two following matrices should be
+ * considered equals if you flip your head by 180 degrees
+ *
+ *         boolean [][] t0 = new boolean[][] {
+ *                 {false,true,false,false},
+ *                 {false,false,true,true},
+ *                 {true,false,false,true},
+ *                 {true,true,false,true}
+ *         };
+ *
+ *         // t2 is a version of t2 with two quarter rotations
+ *         boolean [][] t2 = new boolean[][] {
+ *                 {true,false,true,true},
+ *                 {true,false,false,true},
+ *                 {true,true,false,false},
+ *                 {false,false,true,false}
+ *         };
+ */
+public class QRcode {
+
+    protected boolean [][] data;
+
+    /**
+     * Create a QR code object
+     * @param data is a n x n square matrix
+     */
+    public QRcode(boolean [][] data) {
+        this.data = data;
+    }
+
+    /**
+     * Return true if the other matrix is identical up to
+     * 0, 1, 2 or 3 number of rotations
+     * @param o the other matrix to compare to
+     * @return
+     */
+    @Override
+    public boolean equals(Object o) {
+
+        QRcode other = (QRcode) o;
+        boolean[][] toTest = other.data;
+
+        boolean[][] res1 = new boolean[data.length][data[0].length];
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < data[0].length; j++) {
+                res1[data.length-1-j][i] = data[i][j];
+            }
+        }
+        boolean[][] res2 = new boolean[data.length][data[0].length];
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < data[0].length; j++) {
+                res2[data.length-1-j][i] = res1[i][j];
+            }
+        }
+        boolean[][] res3 = new boolean[data.length][data[0].length];
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < data[0].length; j++) {
+                res3[data.length-1-j][i] = res2[i][j];
+            }
+        }
+        return idem(res1, toTest) || idem(data, toTest) || idem(res2, toTest) || idem(res3, toTest);
+    }
+
+    public boolean idem(boolean[][] a, boolean[][] b){
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a[0].length; j++) {
+                if (a[i][j] != b[i][j]) return false;
+            }
+        }
+        return true;
+    }
+}
