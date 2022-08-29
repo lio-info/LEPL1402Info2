@@ -1,0 +1,103 @@
+import java.util.Arrays;                                          //Mon code
+
+/**
+ * Make sure that the equal method considers
+ * two QR codes as identical if they have been flipped
+ * by 0,1,2 or 3 quarter rotations
+ *
+ * For instance the two following matrices should be
+ * considered equals if you flip your head by 180 degrees
+ *
+ *         boolean [][] t0 = new boolean[][] {
+ *                 {false,true,false,false},
+ *                 {false,false,true,true},
+ *                 {true,false,false,true},
+ *                 {true,true,false,true}
+ *         };
+ *
+ *         // t2 is a version of t2 with two quarter rotations
+ *         boolean [][] t2 = new boolean[][] {
+ *                 {true,false,true,true},
+ *                 {true,false,false,true},
+ *                 {true,true,false,false},
+ *                 {false,false,true,false}
+ *         };
+ */
+public class QRcode {
+
+    protected boolean [][] data;
+
+    /**
+     * Create a QR code object
+     * @param data is a n x n square matrix
+     */
+    public QRcode(boolean [][] data) {
+        this.data = data;
+    }
+
+    /**
+     * Return true if the other matrix is identical up to
+     * 0, 1, 2 or 3 number of rotations
+     * param o the other matrix to compare to
+     * @return
+     */
+    @Override
+    public boolean equals(Object o) {
+        QRcode other = (QRcode) o;
+
+        for (int i=0 ; i<4 ; i++){
+            if (sameQRcode( this.data , other.data)){
+                return true;
+            }
+             other.data = rotate90(other.data);
+        }
+        return false;
+    }
+
+    public static boolean[][] rotate90(boolean[][] QRcode){
+        boolean[][] rotatedQRcode = new boolean[QRcode.length][];
+        for (int j=0 ; j < QRcode.length ; j++){
+            boolean[] column = new boolean[QRcode.length];
+            for (int i=0 ; i < QRcode.length ; i++){
+                column[i] = QRcode[QRcode.length - (i+1)][j];
+            }
+            rotatedQRcode[j] = column;
+        }
+        return rotatedQRcode;
+    }
+
+    public static boolean sameQRcode(boolean[][] QRcode1 , boolean[][] QRcode2){
+        for (int i=0 ; i < QRcode1.length ; i++){
+            for (int j=0 ; j < QRcode1[i].length ; j++){
+                if (QRcode1[i][j] != QRcode2[i][j]){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        boolean[][] t1 = {{true,false,true,true},
+                          {true,false,false,true},
+                          {true,true,false,false},
+                          {false,false,true,false}};
+        QRcode myQRcode1 = new QRcode(t1);
+
+        boolean[][] t2 = {{false,true,true,true},
+                          {false,true,false,false},
+                          {true,false,false,true},
+                          {false,false,true,true}};
+        QRcode myQRcode2 = new QRcode(t2);
+
+        boolean[][] t3 = {{false,false,true,true},
+                          {false,true,false,false},
+                          {true,false,false,true},
+                          {false,false,true,true}};
+        QRcode myQRcode3 = new QRcode(t3);
+
+        System.out.println(myQRcode1.equals(myQRcode2));
+        System.out.println(myQRcode1.equals(myQRcode3));
+    }
+
+}
