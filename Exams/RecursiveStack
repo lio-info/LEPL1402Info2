@@ -1,3 +1,22 @@
+import java.util.NoSuchElementException;                      //C'est pas mon code et il ne provient pas du github epl donc éviter de le partager svp.
+
+/**
+ * Question:
+ *
+ * You are asked to implement the abstract data type RecursiveStack below.
+ *
+ * Your implementation can be an inner static class or a class below.
+ * The factory method "makeRecursiveStack" returns a new instance of your implementation
+ *
+ * Once it is done, copy-paste the complete file in Inginious also with the imports
+ *
+ *
+ * Feel free to add classes, methods or fields in the class but do not modify
+ * the signature of existing code
+ *
+ */
+
+
 public interface RecursiveStack {
 
     /**
@@ -5,7 +24,7 @@ public interface RecursiveStack {
      * @return a new instance of your implementation of RecursiveStack
      */
     public static RecursiveStack makeRecursiveStack() {
-        return new RecS();
+        return new MyStack();
     }
 
     int size();
@@ -14,39 +33,46 @@ public interface RecursiveStack {
     RecursiveStack addTop(int v);
 
     // TODO implement an (inner) class that implements the interface
-    class RecS implements RecursiveStack {
-        
-        RecS next = null;
-        Integer val = null;
-        
-        RecS() {}
-        
-        private RecS(int v, RecS next) {
-            this.val = Integer.valueOf(v);
+    class MyStack implements RecursiveStack {
+
+        MyStack next = null;
+        Integer value = null;
+
+        MyStack() {}
+
+        public MyStack(int v , MyStack next){
+            this.value = v;
             this.next = next;
         }
-        
+
         @Override
         public int size() {
-            if (this.val == null) return 0;
-            if (this.next == null) return 1;
+            if (this.value == null){
+                return 0;
+            }
+            if (this.next.value == null){
+                return 1;
+            }
             return this.next.size()+1;
         }
-            
+
         @Override
-        public int top() {
-            if (this.val == null) throw new java.util.NoSuchElementException();
-            return this.val.intValue();
+        public int top() throws NoSuchElementException {
+            if (this.value == null){
+                throw new NoSuchElementException();
+            }
+            return this.value;
         }
-        
+
         @Override
         public RecursiveStack removeTop() {
             return this.next;
         }
-        
+
         @Override
         public RecursiveStack addTop(int v) {
-            return new RecS(v, this);
-        }  
+            return new MyStack(v , this);
+        }
     }
+
 }
