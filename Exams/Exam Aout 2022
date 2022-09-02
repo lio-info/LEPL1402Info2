@@ -1,0 +1,132 @@
+public class MagicSquare {
+
+    /* Première question de l'examen d'Aout 2022 : Magic Square
+
+    Un magic square est une matrice de dimension n*n :
+    -qui contient comme éléments chaque nombre allant de 1 à n*n, exactement une et une seule fois.
+    -dont la somme des éléments de chaque ligne et la somme des éléments de chaque colonne et la somme des éléments
+    des deux diagonales sont identiques.
+    Exemple :
+    (2 7 6) Cette matrice est de dimension 3*3 et contient tous les éléments de 1 à n*n=9 exactement une et une seule fois.
+    (9 5 1) La somme de chaque ligne = 15. Idem pour les colonnes et diagonales.
+    (4 3 8)
+
+    L'exercice est d'écrire un code qui retourne true si la matrice est un magic square et false sinon. Je pense qu'il
+    était aussi dit qu'on pouvait faire l'hypothèse que la matrice passée en paramètre de notre méthode n'est pas vide,
+    il ne faut donc pas faire le test if (matrix == null).....
+     */
+     
+    //@Param matrix : matrice non nulle
+    //@return boolean true si matrix est un magic square, false sinon.
+    //TODO : Implémenter le body da la méthode isMagicSquare. Vous pouvez ajouter d'autres méthodes supplémentaires.
+    public static boolean isMagicSquare(int[][] matrix){
+
+        return true;
+    }
+
+
+
+    //Essayez de faire l'exercice tt seul d'abord, il est vrmt abordable.
+    //Ma solution :
+
+    public static boolean isMagicSquareSolution(int[][] matrix){
+        int l = matrix.length;
+
+        int element = 1;
+        while (element <= l*l){ //on check que la matrice contient bien chaque élément allant de 1 à n*n une et une seule fois
+            int whileBreaker = 0;
+            for (int i=0 ; i < l ; i++){
+                for (int j=0 ; j < l ; j++){
+                    if (matrix[i][j] == element){
+                        element ++;
+                        whileBreaker ++;
+                    }
+                }
+            }
+            if (whileBreaker == 0){
+                return false;
+            }
+        }
+
+        int sum = 0;
+        for (int n=0 ; n < l ; n++){  //On détermine la valeur de sum qu'il faudra tester pour chaque ligne, colonne et diagonale
+            sum += matrix[0][n];
+        }
+
+        if ( !(testRows(matrix , l , sum)) || !(testColumns(matrix , l , sum)) ||
+                !(testDiagonal1(matrix , l ,sum)) || !(testDiagonal2(matrix , l ,sum)) ){
+            return false; //on test que la somme des éléments de chaque ligne, colonne et diagonale == sum (voir methodes plus bas)
+        }
+
+        return true;
+    }
+
+
+    public static boolean testRows(int[][] matrix , int l , int sum){
+        for (int i=0 ; i < l ; i++){
+            int counter = 0;
+            for (int j=0 ; j < l ; j++){
+                counter += matrix[i][j];
+            }
+            if (counter != sum){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean testColumns(int[][] matrix , int l , int sum){
+        for (int i=0 ; i < l ; i++){
+            int counter = 0;
+            for (int j=0 ; j < l ; j++){
+                counter += matrix[j][i];
+            }
+            if (counter != sum){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean testDiagonal1(int[][] matrix , int l , int sum){
+        int counter = 0;
+        for (int i=0 ; i < l ; i++){
+            counter += matrix[i][i];
+        }
+        if (counter != sum){
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean testDiagonal2(int[][] matrix , int l , int sum){
+        int counter = 0;
+        for (int i=0 ; i < l ; i++){
+            counter += matrix[i][l-1-i];
+        }
+        if (counter != sum){
+            return false;
+        }
+        return true;
+    }
+
+
+
+
+    public static void main(String[] args) {
+        int[][] a = { {2,7,6} ,
+                      {9,5,1} ,
+                      {4,3,8} };
+        int[][] b = { {-2,-7,-6} ,
+                      {-9,-5,-1} ,
+                      {-4,-3,-8} };
+        int[][] c = {{4}};
+        int[][] d = {{1}};
+
+        System.out.println(isMagicSquareSolution(a));
+        System.out.println(isMagicSquareSolution(b));
+        System.out.println(isMagicSquareSolution(c));
+        System.out.println(isMagicSquareSolution(d));
+    }
+
+}
