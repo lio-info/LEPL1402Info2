@@ -13,9 +13,9 @@ public class MagicSquare {
 
     L'exercice est d'écrire un code qui retourne true si la matrice est un magic square et false sinon. Je pense qu'il
     était aussi dit qu'on pouvait faire l'hypothèse que la matrice passée en paramètre de notre méthode n'est pas vide,
-    il ne faut donc pas faire le test if (matrix == null).....
+    il ne faut donc pas faire le test if (matrix == null)..... Je n'ai pas créé de tests pour votre code mais j'ai mis
+    des print avec ceraines matrices dans la méthode main (voir tout en bas).
      */
-     
     //@Param matrix : matrice non nulle
     //@return boolean true si matrix est un magic square, false sinon.
     //TODO : Implémenter le body da la méthode isMagicSquare. Vous pouvez ajouter d'autres méthodes supplémentaires.
@@ -112,21 +112,41 @@ public class MagicSquare {
 
 
 
-
     public static void main(String[] args) {
+
         int[][] a = { {2,7,6} ,
                       {9,5,1} ,
                       {4,3,8} };
+
         int[][] b = { {-2,-7,-6} ,
                       {-9,-5,-1} ,
                       {-4,-3,-8} };
-        int[][] c = {{4}};
-        int[][] d = {{1}};
 
+        int[][] c = { {2,4,9} ,
+                      {7,8,1} ,
+                      {6,3,5} };
+
+        int[][] d = {{4}};
+        int[][] e = {{1}};
+        int[][] f = { {3,3,3} ,
+                      {3,3,3} ,
+                      {3,3,3} };
+
+        System.out.println(isMagicSquare(a));  //Doit retourner true
+        System.out.println(isMagicSquare(b));  //Doit retourner false
+        System.out.println(isMagicSquare(c));  //Doit retourner false
+        System.out.println(isMagicSquare(d));  //Doit retourner false
+        System.out.println(isMagicSquare(e));  //Doit retourner true
+        System.out.println(isMagicSquare(f));  //Doit retourner false
+
+        /*
         System.out.println(isMagicSquareSolution(a));
         System.out.println(isMagicSquareSolution(b));
         System.out.println(isMagicSquareSolution(c));
         System.out.println(isMagicSquareSolution(d));
+        System.out.println(isMagicSquareSolution(e));
+        System.out.println(isMagicSquareSolution(f));
+        */
     }
 
 }
