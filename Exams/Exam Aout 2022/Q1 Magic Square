@@ -22,7 +22,7 @@ public class MagicSquare {
 
     /**
      *
-     * @param matrix a square matrix of size n x n (you can consider that matrix is never null : {{}})
+     * @param matrix a square matrix of size n x n (you can assume that "matrix" is never null)
      * @return true if matrix is a n x n magic square, false otherwise
      */
     public static boolean isMagicSquare(int [][] matrix) {
