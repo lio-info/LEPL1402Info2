@@ -1,33 +1,41 @@
 public class MagicSquare {
 
-    /* Première question de l'examen d'Aout 2022 : Magic Square
-
-    Un magic square est une matrice de dimension n*n :
-    -qui contient comme éléments chaque nombre allant de 1 à n*n, exactement une et une seule fois.
-    -dont la somme des éléments de chaque ligne et la somme des éléments de chaque colonne et la somme des éléments
-    des deux diagonales sont identiques.
-    Exemple :
-    (2 7 6) Cette matrice est de dimension 3*3 et contient tous les éléments de 1 à n*n=9 exactement une et une seule fois.
-    (9 5 1) La somme de chaque ligne = 15. Idem pour les colonnes et diagonales.
-    (4 3 8)
-
-    L'exercice est d'écrire un code qui retourne true si la matrice est un magic square et false sinon. Je pense qu'il
-    était aussi dit qu'on pouvait faire l'hypothèse que la matrice passée en paramètre de notre méthode n'est pas vide,
-    il ne faut donc pas faire le test if (matrix == null)..... Je n'ai pas créé de tests pour votre code mais j'ai mis
-    des print avec ceraines matrices dans la méthode main (voir tout en bas).
+    /**
+     * Question 1 de l'exam d'Août 2022
+     * Lors de la consultation des copies, les profs n'ont pas donné les tests qu'ils ont utilisés pour évaluer les codes.
+     * J'ai donc ajouté quelques matrices spécifiques qui testent votre méthode dans la méthode main tout en bas.
+     *
+     *
+     * A magic square is an (n x n) matrix such that:
+     *
+     * - all the positive numbers 1,2, ..., n*n are present (thus each number appears exactly once)
+     * - the sums of the numbers in each row, each column and both main diagonals are the same
+     *
+     *   For instance a 3 x 3 magic square is the following
+     *
+     *   2 7 6
+     *   9 5 1
+     *   4 3 8
+     *
+     *   You have to implement the method that verifies if a matrix is a valid magic square
      */
-    //@Param matrix : matrice non nulle
-    //@return boolean true si matrix est un magic square, false sinon.
-    //TODO : Implémenter le body da la méthode isMagicSquare. Vous pouvez ajouter d'autres méthodes supplémentaires.
-    public static boolean isMagicSquare(int[][] matrix){
+
+    /**
+     *
+     * @param matrix a square matrix of size n x n (you can consider that matrix is never null : {{}})
+     * @return true if matrix is a n x n magic square, false otherwise
+     */
+    public static boolean isMagicSquare(int [][] matrix) {
+        //TODO
 
         return true;
     }
 
+    
 
 
-    //Essayez de faire l'exercice tt seul d'abord, il est vrmt abordable.
-    //Ma solution :
+    //Ma solution qui a rapporté 100% :
+
 
     public static boolean isMagicSquareSolution(int[][] matrix){
         int l = matrix.length;
@@ -47,6 +55,9 @@ public class MagicSquare {
                 return false;
             }
         }
+        if (element != l*l +1){  //Je pense que ceci ne sert à rien, parce qu'il sera tjr true si on parvient à sortir
+            return false;        //de la boucle while...
+        }
 
         int sum = 0;
         for (int n=0 ; n < l ; n++){  //On détermine la valeur de sum qu'il faudra tester pour chaque ligne, colonne et diagonale
@@ -60,7 +71,6 @@ public class MagicSquare {
 
         return true;
     }
-
 
     public static boolean testRows(int[][] matrix , int l , int sum){
         for (int i=0 ; i < l ; i++){
@@ -78,7 +88,7 @@ public class MagicSquare {
     public static boolean testColumns(int[][] matrix , int l , int sum){
         for (int i=0 ; i < l ; i++){
             int counter = 0;
-            for (int j=0 ; j < l ; j++){
+            for (int j=0 ; j < l  ; j++){
                 counter += matrix[j][i];
             }
             if (counter != sum){
@@ -101,7 +111,7 @@ public class MagicSquare {
 
     public static boolean testDiagonal2(int[][] matrix , int l , int sum){
         int counter = 0;
-        for (int i=0 ; i < l ; i++){
+        for (int i = l-1 ; i >= 0 ; i--){
             counter += matrix[i][l-1-i];
         }
         if (counter != sum){
@@ -109,11 +119,11 @@ public class MagicSquare {
         }
         return true;
     }
-
-
+    
+    
+    
 
     public static void main(String[] args) {
-
         int[][] a = { {2,7,6} ,
                       {9,5,1} ,
                       {4,3,8} };
@@ -132,12 +142,9 @@ public class MagicSquare {
                       {3,3,3} ,
                       {3,3,3} };
 
-        System.out.println(isMagicSquare(a));  //Doit retourner true
-        System.out.println(isMagicSquare(b));  //Doit retourner false
-        System.out.println(isMagicSquare(c));  //Doit retourner false
-        System.out.println(isMagicSquare(d));  //Doit retourner false
-        System.out.println(isMagicSquare(e));  //Doit retourner true
-        System.out.println(isMagicSquare(f));  //Doit retourner false
+        int[][] g = { {1,9,5} ,
+                      {9,5,1} ,
+                      {5,1,9} };
 
         /*
         System.out.println(isMagicSquareSolution(a));
@@ -146,7 +153,16 @@ public class MagicSquare {
         System.out.println(isMagicSquareSolution(d));
         System.out.println(isMagicSquareSolution(e));
         System.out.println(isMagicSquareSolution(f));
-        */
-    }
+        System.out.println(isMagicSquareSolution(g));
+         */
 
+        System.out.println(isMagicSquare(a));  //doit retourner true
+        System.out.println(isMagicSquare(b));  //doit retourner false
+        System.out.println(isMagicSquare(c));  //doit retourner false
+        System.out.println(isMagicSquare(d));  //doit retourner false
+        System.out.println(isMagicSquare(e));  //doit retourner true
+        System.out.println(isMagicSquare(f));  //doit retourner false
+        System.out.println(isMagicSquare(g));  //doit retourner false
+        
+    }
 }
